@@ -144,6 +144,60 @@ class LinkedList {
     return arrayList[index].value;
   }
 
+  clone() {
+    let clone = new LinkedListNode;
+    let currentNode = this.head;
+
+    const list2 = new LinkedList;
+
+    do {
+      list2.append(currentNode.value);
+      currentNode = currentNode.next;
+    } while (currentNode != this.head);
+
+    return list2;
+    // const fnClone = (currNode, cl) => {
+    //   if (currNode == this.tail) { 
+    //     return { value: currNode.value, next: currNode.next };
+    //   }
+      
+    //   cl.next = new LinkedListNode(currNode.next.value, fnClone(currNode.next, cl));
+    //   return { value: currNode.value, next: cl.next.next };
+    // }
+    
+    // const result = fnClone(currentNode, clone);
+
+    // let nodes = [];
+    // let curNode = result;
+    // let i = 0;
+    // while(i < 9) {
+    //   nodes.push(curNode.value);
+    //   curNode = curNode.next;
+    //   i++;
+    // }
+    // console.log(nodes);
+    // //console.log(result);
+    //return result;
+  }
+
+  reverse() {
+    let currNode = this.head;
+    let prevNode = this.tail;
+    let nextNode = null;
+
+    do {
+      nextNode = currNode.next;
+      currNode.next = prevNode;
+      prevNode = currNode;
+      currNode = nextNode;
+    } while (currNode != this.head);
+  
+    this.tail = this.head;
+    this.head = prevNode;
+  
+    return this;
+  }
+
 }
 
 // Use case
@@ -181,3 +235,9 @@ console.log(`Delete all '${deleteAll}'. List in string: ' + ${list}`);
 const index = 0;
 const getByIndex = list.get(index);
 console.log(`Get value '${getByIndex}', by index ${index}`);
+
+const clone = list.clone();
+console.log('Clone list in string: ' + list);
+
+list.reverse();
+console.log('Revers list in string: ' + list);
