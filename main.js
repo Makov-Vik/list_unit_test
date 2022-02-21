@@ -214,6 +214,33 @@ class LinkedList {
     return index;
   }
 
+  clear() {
+    let currentNode = this.head;
+    let nextNode = currentNode.next;
+    while (nextNode != null) {
+      currentNode.next = null;
+      currentNode = nextNode;
+      nextNode = currentNode.next;
+    }
+
+    this.head = null;
+    this.tail = null;
+    return this;
+
+  }
+
+  extend(list2) {
+    const list2Clone = list2.clone();
+    const lastItemOf1List = this.tail;
+
+    const firstItem2List = list2Clone.head;
+    const lastIitem2List = list2Clone.tail;
+
+    lastItemOf1List.next = firstItem2List;
+    lastIitem2List.next = this.head;
+
+    return this;
+  }
 }
 
 // Use case
@@ -265,3 +292,22 @@ console.log(`Find first index ${elFirst}: ${findFirst}`);
 const elLast = 'r';
 const findLast = list.findLast(elLast);
 console.log(`Find last index ${elLast}: ${findLast}`);
+
+const list2 = new LinkedList;
+list2.append('s');
+list2.append('m');
+list2.append('t');
+list2.append('h');
+list2.append('n');
+list2.append('e');
+list2.append('w');
+list.extend(list2);
+console.log('Extend list in string: ' + list);
+
+list2.append('L');
+list2.append('O');
+list2.append('L');
+console.log('Extend list1 in string after append to list2: ' + list);
+
+list.clear();
+console.log('Clear list: ', list);
