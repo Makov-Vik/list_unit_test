@@ -198,6 +198,22 @@ class LinkedList {
     return this;
   }
 
+  findFirst(value) {
+    const arrayList = this.toArray().map(node => node.value);
+    return arrayList.indexOf(value);
+  }
+
+  findLast(value) {
+    const arrayList = this.toArray().map(node => node.value);
+    arrayList.reverse();
+    const indexFirst = arrayList.indexOf(value);
+    if (indexFirst < 0) return indexFirst;
+
+    // completoin of the element index
+    const index = arrayList.length - arrayList.indexOf(value) - 1;
+    return index;
+  }
+
 }
 
 // Use case
@@ -241,3 +257,11 @@ console.log('Clone list in string: ' + list);
 
 list.reverse();
 console.log('Revers list in string: ' + list);
+
+const elFirst = 'c';
+const findFirst = list.findFirst(elFirst);
+console.log(`Find first index ${elFirst}: ${findFirst}`);
+
+const elLast = 'r';
+const findLast = list.findLast(elLast);
+console.log(`Find last index ${elLast}: ${findLast}`);
