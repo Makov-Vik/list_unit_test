@@ -54,7 +54,7 @@ class LinkedList {
   }
 
   insert(value, index) {
-    if(index < 0 || this.toArray().length < index) {
+    if (index < 0 || this.toArray().length < index) {
       throw new Error('Invalid index');
     }
 
@@ -63,7 +63,7 @@ class LinkedList {
     let nextNode;
     const newNode = new LinkedListNode(value);
 
-    if(index === 0) {
+    if (index === 0) {
       nextNode = currentNode;
       newNode.next = nextNode;
       this.head = newNode;
@@ -81,7 +81,7 @@ class LinkedList {
   }
 
   delete(index) {
-    if(index < 0 || this.toArray().length <= index) {
+    if (index < 0 || this.toArray().length <= index) {
       throw new Error('Invalid index');
     }
 
@@ -90,10 +90,11 @@ class LinkedList {
     let nextNode;
     let deleteNode;
 
-    if(index === 0) {
+    if (index === 0) {
       nextNode = currentNode.next;
       currentNode.next = null;
       this.head = nextNode;
+      this.tail.next = nextNode;
       return currentNode;
     }
     else {
@@ -110,6 +111,39 @@ class LinkedList {
     }
     return deleteNode;
   }
+
+  deleteAll(value) {
+    let currentNode = this.head;
+    let nextNode;
+
+    if (currentNode.value == value) {
+      nextNode = currentNode.next;
+      this.head.next = null;
+      this.head = nextNode
+      this.tail.next = nextNode;
+      currentNode = this.head;
+    }
+
+    do {
+      if (currentNode.next.value == value) {
+        const deleteItem = currentNode.next;
+        nextNode = deleteItem.next;
+        deleteItem.next = null;
+        currentNode.next = nextNode;
+
+      }
+      currentNode = currentNode.next;
+    } while (currentNode != this.head);
+  }
+
+  get(index) {
+    const arrayList = this.toArray();
+    if (index < 0 || arrayList.length <= index) {
+      throw new Error('Invalid index');
+    }
+    return arrayList[index].value;
+  }
+
 }
 
 // Use case
@@ -124,21 +158,26 @@ list.append("t");
 list.append("e");
 list.append("r");
 
+
 const nodeStringifier = value => `${value}`;
 
-const allList = list.toString(nodeStringifier)
-console.log('List in string: ' + allList);
+const allList2 = list.toString(nodeStringifier)
+console.log('List in string: ' + allList2);
 
 const length = list.length();
 console.log('Length: ' + length);
 
-console.log('Insert "p"');
 list.insert('p', 9);
-const allList2 = list.toString(nodeStringifier)
-console.log('List in string: ' + allList2);
+console.log('Insert "p". List in string: ' + list);
 
 const deleteNode = list.delete(9);
 console.log('Delete Node: ', deleteNode);
-const allList3 = list.toString(nodeStringifier)
-console.log('List in string: ' + allList3);
+console.log('List in string: ' + list);
 
+const deleteAll = 'c';
+list.deleteAll(deleteAll);
+console.log(`Delete all '${deleteAll}'. List in string: ' + ${list}`);
+
+const index = 0;
+const getByIndex = list.get(index);
+console.log(`Get value '${getByIndex}', by index ${index}`);
