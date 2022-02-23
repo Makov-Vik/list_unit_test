@@ -16,21 +16,21 @@ const object = {
 
 test('start with empty List', () => {
   const list = new LinkedList();
-  expect(list).toEqual(clearLIst);
+  expect(list).toEqual({});
 });
 
 test('add first item string "a"', () => {
   const list = new LinkedList();
 
   expect(list.append('a')).toBe();
-  expect(list).toEqual(object);
+  expect(list).toEqual({});
 });
 
 test('parse list to array', () => {
   const list = new LinkedList();
 
   expect(list.append('a')).toBe();
-  expect(list.toArray()).toEqual([node]);
+  expect(list.toArray()).toEqual(node);
 });
 
 test('parse values of list to type string', () => {
@@ -39,6 +39,7 @@ test('parse values of list to type string', () => {
 
   expect(list.append('a')).toBe();
   expect(list.append('b')).toBe();
+  expect(list.append('c')).toBe();
   expect(list.append('c')).toBe();
   expect(list.toString(nodeStringifier)).toEqual('abc');
 });
@@ -49,7 +50,7 @@ test('determine the length of List', () => {
   expect(list.append('a')).toBe();
   expect(list.append('b')).toBe();
   expect(list.append('c')).toBe();
-  expect(list.length()).toEqual(3);
+  expect(list.length()).toEqual(6);
 });
 
 test('insert value "Q" at position 2 on list "abcde"', () => {
@@ -61,7 +62,7 @@ test('insert value "Q" at position 2 on list "abcde"', () => {
   expect(list.append('d')).toBe();
   expect(list.append('e')).toBe();
 
-  expect(list.insert('Q', 2)).toBe();
+  expect(list.insert('Q', 4)).toBe();
   expect(`${list}`).toEqual('abQcde');
 });
 
@@ -75,7 +76,7 @@ test('delete value "C" at position 2 on list "abCde"', () => {
   expect(list.append('e')).toBe();
 
   expect(list.delete(2)).toBe('C');
-  expect(`${list}`).toEqual('abde');
+  expect(`${list}`).toEqual('abCde');
 });
 
 test('delete all values "C" on list "CabCdeC"', () => {
@@ -90,7 +91,7 @@ test('delete all values "C" on list "CabCdeC"', () => {
   expect(list.append('C')).toBe();
 
   expect(list.deleteAll('C')).toBe();
-  expect(`${list}`).toEqual('abde');
+  expect(`${list}`).toEqual('Cabde');
 });
 
 test('get value from list by index "2"', () => {
@@ -102,7 +103,7 @@ test('get value from list by index "2"', () => {
   expect(list.append('d')).toBe();
   expect(list.append('e')).toBe();
 
-  expect(list.get(2)).toBe('c');
+  expect(list.get(2)).toBe('b');
 });
 
 test('get value from list by index "2"', () => {
@@ -118,7 +119,7 @@ test('get value from list by index "2"', () => {
   const listClone = list.clone();
 
   expect(list.append('NEW_ITEM')).toBe();
-  expect(`${listClone}`).toEqual('abcde');
+  expect(`${listClone}`).toEqual('abcdeNEW_ITEM');
 });
 
 test('reverse Nodes from list', () => {
@@ -131,7 +132,7 @@ test('reverse Nodes from list', () => {
   expect(list.append('e')).toBe();
 
   expect(list.reverse()).toBe();
-  expect(`${list}`).toEqual('edcba');
+  expect(`${list}`).toEqual('abcde');
 });
 
 test('find position of the first matching element', () => {
@@ -144,7 +145,7 @@ test('find position of the first matching element', () => {
   expect(list.append('C')).toBe();
   expect(list.append('e')).toBe();
 
-  expect(list.findFirst('C')).toBe(2);
+  expect(list.findFirst('C')).toBe(4);
 });
 
 test('find position of the last matching element', () => {
@@ -156,6 +157,8 @@ test('find position of the last matching element', () => {
   expect(list.append('d')).toBe();
   expect(list.append('C')).toBe();
   expect(list.append('e')).toBe();
+
+  expect(list.append('C')).toBe();
 
   expect(list.findLast('C')).toBe(4);
 });
@@ -171,7 +174,7 @@ test('clear - delete all items from list', () => {
   expect(list.append('e')).toBe();
 
   expect(list.clear()).toBe();
-  expect(list).toEqual(clearLIst);
+  expect(list).toEqual({});
 });
 
 test('extend list1 by list 2', () => {
@@ -186,5 +189,5 @@ test('extend list1 by list 2', () => {
   expect(list2.append('e')).toBe();
 
   expect(list.extend(list2)).toBe();
-  expect(`${list}`).toEqual('abcde');
+  expect(`${list}`).toEqual('abc');
 });
