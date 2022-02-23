@@ -6,6 +6,7 @@ const node = {
   "next": {},
   "value": "a",
 }
+
 node.next = node;
 
 const object = {
