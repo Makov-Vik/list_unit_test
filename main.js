@@ -22,13 +22,11 @@ class LinkedList {
       this.head = newNode;
       this.tail = newNode;
       this.tail.next = newNode;
-      return this;
     }
   
     this.tail.next = newNode;
     this.tail = newNode;
     this.tail.next = this.head;
-    return this;
   }
 
   toArray() {
@@ -47,7 +45,7 @@ class LinkedList {
       return this.toArray()
       .map(node => node.toString(callback))
       .join('');
-    }
+  }
 
   length() {
     return this.toArray().length;
@@ -109,7 +107,7 @@ class LinkedList {
       deleteNode.next = null;
       currentNode.next = nextNode;
     }
-    return deleteNode;
+    return deleteNode.value;
   }
 
   deleteAll(value) {
@@ -145,7 +143,6 @@ class LinkedList {
   }
 
   clone() {
-    let clone = new LinkedListNode;
     let currentNode = this.head;
 
     const list2 = new LinkedList;
@@ -156,28 +153,6 @@ class LinkedList {
     } while (currentNode != this.head);
 
     return list2;
-    // const fnClone = (currNode, cl) => {
-    //   if (currNode == this.tail) { 
-    //     return { value: currNode.value, next: currNode.next };
-    //   }
-      
-    //   cl.next = new LinkedListNode(currNode.next.value, fnClone(currNode.next, cl));
-    //   return { value: currNode.value, next: cl.next.next };
-    // }
-    
-    // const result = fnClone(currentNode, clone);
-
-    // let nodes = [];
-    // let curNode = result;
-    // let i = 0;
-    // while(i < 9) {
-    //   nodes.push(curNode.value);
-    //   curNode = curNode.next;
-    //   i++;
-    // }
-    // console.log(nodes);
-    // //console.log(result);
-    //return result;
   }
 
   reverse() {
@@ -194,8 +169,6 @@ class LinkedList {
   
     this.tail = this.head;
     this.head = prevNode;
-  
-    return this;
   }
 
   findFirst(value) {
@@ -225,8 +198,6 @@ class LinkedList {
 
     this.head = null;
     this.tail = null;
-    return this;
-
   }
 
   extend(list2) {
@@ -238,10 +209,10 @@ class LinkedList {
 
     lastItemOf1List.next = firstItem2List;
     lastIitem2List.next = this.head;
-
-    return this;
   }
 }
+
+module.exports = LinkedList, LinkedListNode ;
 
 // Use case
 const list = new LinkedList;
